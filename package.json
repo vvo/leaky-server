@@ -1,0 +1,17 @@
+{
+  "name": "leaks",
+  "version": "0.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "async": "~0.2.9",
+    "request": "~2.27.0",
+    "webkit-devtools-agent": "~0.1.2"
+  }
+}

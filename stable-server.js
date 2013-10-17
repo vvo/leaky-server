@@ -1,17 +1,23 @@
-var wrapped = [];
+var LRU = require("lru-cache")
+var bodyCache = LRU(500);
 var agent = require('webkit-devtools-agent');
 
-function WrapRequest(req) {
-  var wrap = this;
-  this.body = [];
+function decodeBody(req, cb) {
+  var cached = {
+    body: ''
+  };
+
   req.on('data', function(chunk) {
-    wrap.body.push(chunk);
+    cached.body += chunk.toString();
   });
+
+  return cached;
 }
 
 require('http')
   .createServer(function handleRequest(req, res) {
-    wrapped.push(new WrapRequest(req));
+    bodyCache.set(req.url, decodeBody(req));
+
     res.end('GOODBYE');
   })
   .listen(25000)
